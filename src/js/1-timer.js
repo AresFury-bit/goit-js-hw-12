@@ -47,8 +47,7 @@ function convertMs(ms) {
     userSelectedDate = selectedDates[0];
     if (userSelectedDate <= Date.now()) {
       iziToast.show({
-    title: 'Error',
-    message: '"Please choose a date in the future"'
+    message: 'Please choose a date in the future'
 });
       buttonStart.disabled = true;
       userSelectedDate = null;
@@ -81,7 +80,7 @@ buttonStart.addEventListener("click", () => {
         dataSeconds.textContent = addLeadingZero(timeStr.seconds); 
         if (deltaTime <= 1000) { 
           clearInterval(timerId);
-          buttonStart.disabled = false;
+          // buttonStart.disabled = false;
           input.disabled = false;
         }
       }, 1000);
