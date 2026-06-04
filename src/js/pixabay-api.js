@@ -20,7 +20,7 @@ const axiosInstance = axios.create({
             safesearch: true,
         }
     });
-export function getImagesByQuery(query, page = 1, per_page = 40) {
+export function getImagesByQuery(query) {
    
     const res = axiosInstance.get("", { params: { q: query } }).then(res => {
         return res.data;

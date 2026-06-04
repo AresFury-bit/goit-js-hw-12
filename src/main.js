@@ -37,6 +37,7 @@ iziToast.error({
         iziToast.error({
             message: 'An error occurred while fetching images. Please try again later.',
         });
+        form.reset()
     });
     form.reset();
 })
