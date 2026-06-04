@@ -24,11 +24,13 @@ const axiosInstance = axios.create({
     });
 export function getImagesByQuery(query) {
    
-    const res = axiosInstance.get("", { params: { q: query } }).then(res => {return res.data;
+    const res = axiosInstance.get("", { params: { q: query } }).then(res => {
+        return res.data;
     }).catch(error => {
         iziToast.error({
-    message: error,
-});
+    message: 'Something went wrong with the API request!',
+        });
+        throw error;
     });
     return res;
 }

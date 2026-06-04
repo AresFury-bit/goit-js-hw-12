@@ -11,7 +11,7 @@ const form = document.querySelector(".form")
 const submitBtn = document.querySelector("button[type='submit']");
 let query = "";
 
-submitBtn.addEventListener("click", (e) => {
+form.addEventListener("submit", (e) => {
     e.preventDefault();
     renderFunctions.clearGallery();
     // debugger;
@@ -25,7 +25,7 @@ iziToast.error({
       renderFunctions.showLoader();
     const data = getImagesByQuery(query).then(data => {
         renderFunctions.hideLoader();
-        if (data.length === 0) { 
+        if (data.hits.length === 0) { 
 iziToast.error({
     message: 'Sorry, there are no images matching your search query. Please try again!',
 });
