@@ -22,9 +22,9 @@ iziToast.error({
 });
         return;
     }
-      renderFunctions.showLoader();
+    renderFunctions.showLoader();
+    debugger;
     const data = getImagesByQuery(query).then(data => {
-        renderFunctions.hideLoader();
         if (data.hits.length === 0) { 
 iziToast.error({
     message: 'Sorry, there are no images matching your search query. Please try again!',
@@ -33,13 +33,13 @@ iziToast.error({
         }
         renderFunctions.createGallery(data.hits)
     }).catch(error => {
-        renderFunctions.hideLoader();
         iziToast.error({
             message: 'An error occurred while fetching images. Please try again later.',
-        });
-        form.reset()
-    });
-    form.reset();
+        })
+    }).finally(() => {
+            renderFunctions.hideLoader();
+            form.reset()
+        });;
 })
 
 
