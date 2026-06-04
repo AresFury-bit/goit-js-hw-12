@@ -13,6 +13,7 @@ let query = "";
 
 submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
+    renderFunctions.clearGallery();
     // debugger;
     query = document.querySelector("input[name='search-text']").value.trim();
      if (query.trim() === "") { 
@@ -30,7 +31,7 @@ iziToast.error({
 });
             return;
         }
-        renderFunctions.createGallery(data)
+        renderFunctions.createGallery(data.hits)
     }).catch(error => {
         renderFunctions.hideLoader();
         iziToast.error({
