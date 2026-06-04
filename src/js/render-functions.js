@@ -7,7 +7,7 @@ const loaderText = document.querySelector(".loader-text");
 
 
 // Шукаємо посилання <a> всередині нашого контейнера
-let galleryInstance = new simpleLightbox('.gallery-container a', {
+let galleryInstance = new simpleLightbox('.gallery a', {
     captionDelay: 250,
     fileExt: 'png|jpg|jpeg|gif', /* Чітко вказуємо дозволені розширення файлів */
 });
@@ -24,7 +24,7 @@ export function createGallery(images) {
             <li>
             likes ${image.likes}
             </li>
-            <li></li>
+            <li>
             views ${image.views}
             </li>
             <li>
@@ -32,6 +32,7 @@ export function createGallery(images) {
             </li>
              <li>
             downloads ${image.downloads}
+            </li>
         </ul>
         </li>
         `

@@ -12,7 +12,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 
 const axiosInstance = axios.create({
-        baseURL: "https://pixabay.com/api",
+        baseURL: "https://pixabay.com/api/",
         params: {
             key: "56127983-233044a9880c0570de7cf761a",
             image_type: "photo",
