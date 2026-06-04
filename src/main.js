@@ -1,7 +1,7 @@
 
-import * as renderFunctions from "./js/render-functions";
+import * as renderFunctions from "./js/render-functions.js";
 
-import { getImagesByQuery } from "./js/pixabay-api";
+import { getImagesByQuery } from "./js/pixabay-api.js";
 
 import iziToast from "izitoast";
 // Додатковий імпорт стилів
