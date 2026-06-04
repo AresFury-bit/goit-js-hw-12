@@ -1,21 +1,22 @@
-import{s as c,a as u,i as d}from"./assets/vendor-BCnp8CzI.js";(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))n(e);new MutationObserver(e=>{for(const r of e)if(r.type==="childList")for(const a of r.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&n(a)}).observe(document,{childList:!0,subtree:!0});function s(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?r.credentials="include":e.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function n(e){if(e.ep)return;e.ep=!0;const r=s(e);fetch(e.href,r)}})();const f=document.querySelector(".gallery"),l=document.querySelector(".loader-text");let m=new c(".gallery-container a",{captionDelay:250,fileExt:"png|jpg|jpeg|gif"});function y(o){f.innerHTML=o.map(t=>`
+import{s as d,a as f,i}from"./assets/vendor-D0tbaKAu.js";(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))n(r);new MutationObserver(r=>{for(const t of r)if(t.type==="childList")for(const a of t.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&n(a)}).observe(document,{childList:!0,subtree:!0});function s(r){const t={};return r.integrity&&(t.integrity=r.integrity),r.referrerPolicy&&(t.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?t.credentials="include":r.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function n(r){if(r.ep)return;r.ep=!0;const t=s(r);fetch(r.href,t)}})();const m=document.querySelector(".gallery"),u=document.querySelector(".loader-text");let y=new d(".gallery a",{captionDelay:250,fileExt:"png|jpg|jpeg|gif"});function g(o){m.innerHTML=o.map(e=>`
         <li class="gallery-item">
-            <a class="gallery-link" href="${t.largeImageURL}">
-                <img class="gallery-image" src="${t.webformatURL}" alt="${t.tags}" loading="lazy" />
+            <a class="gallery-link" href="${e.largeImageURL}">
+                <img class="gallery-image" src="${e.webformatURL}" alt="${e.tags}" loading="lazy" />
             </a>
             <ul class="galery-info">
             <li>
-            likes ${t.likes}
-            </li>
-            <li></li>
-            views ${t.views}
+            likes ${e.likes}
             </li>
             <li>
-            comments ${t.comments}
+            views ${e.views}
+            </li>
+            <li>
+            comments ${e.comments}
             </li>
              <li>
-            downloads ${t.downloads}
+            downloads ${e.downloads}
+            </li>
         </ul>
         </li>
-        `).join(""),m.refresh()}function p(){l.classList.add("loader")}function g(){l.classList.remove("loader")}const h=u.create({baseURL:"https://pixabay.com/api",params:{key:"56127983-233044a9880c0570de7cf761a",image_type:"photo",orientation:"horizontal",safesearch:!0,page:1,per_page:40}});function L(o){return h.get("",{params:{q:o}}).then(s=>s.data.hits)}const b=document.querySelector(".form"),q=document.querySelector("button[type='submit']");let i="";q.addEventListener("click",o=>{if(o.preventDefault(),i=document.querySelector("input[name='search-text']").value.trim(),i.trim()===""){d.error({message:"Sorry, there are no images matching your search query. Please try again!"});return}p(),L(i).then(t=>{g(),y(t)}),b.reset()});
+        `).join(""),y.refresh()}function p(){u.classList.add("loader")}function c(){u.classList.remove("loader")}const h=f.create({baseURL:"https://pixabay.com/api/",params:{key:"56127983-233044a9880c0570de7cf761a",image_type:"photo",orientation:"horizontal",safesearch:!0,page:1,per_page:40}});function L(o){return h.get("",{params:{q:o}}).then(s=>s.data.hits)}const b=document.querySelector(".form"),q=document.querySelector("button[type='submit']");let l="";q.addEventListener("click",o=>{if(o.preventDefault(),l=document.querySelector("input[name='search-text']").value.trim(),l.trim()===""){i.error({message:"Please enter a value to search for!"});return}p(),L(l).then(e=>{if(c(),e.length===0){i.error({message:"Sorry, there are no images matching your search query. Please try again!"});return}g(e)}).catch(e=>{c(),i.error({message:"An error occurred while fetching images. Please try again later."})}),b.reset()});
 //# sourceMappingURL=index.js.map
