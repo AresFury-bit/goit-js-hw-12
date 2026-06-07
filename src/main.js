@@ -6,12 +6,9 @@ import "izitoast/dist/css/iziToast.min.css";
 const form = document.querySelector(".form");
 const btnLoadMore = document.querySelector(".btn-Load-more");
 
-
 let page = 1;
 const per_page = 15;
-const totalPages = Math.ceil(500 / per_page); 
-let query = "";
-
+let query = ""; 
 
 renderFunctions.hideLoadMoreButton();
 
@@ -43,7 +40,11 @@ form.addEventListener("submit", async (e) => {
         }
         
         renderFunctions.createGallery(data.hits);
-        if (data.totalHits > per_page) {
+        
+    
+        const maxPage = Math.ceil(data.totalHits / per_page);
+        
+        if (page < maxPage) {
             renderFunctions.showLoadMoreButton();
         } else {
             renderFunctions.hideLoadMoreButton();
@@ -59,15 +60,8 @@ form.addEventListener("submit", async (e) => {
         form.reset();
     }
 });
-btnLoadMore.addEventListener("click", async () => {
-    if (page >= totalPages) {
-        renderFunctions.hideLoadMoreButton();
-        return iziToast.error({
-            position: "topRight",
-            message: "We're sorry, there are no more posts to load"
-        });
-    }
 
+btnLoadMore.addEventListener("click", async () => {
     renderFunctions.showLoader();
     renderFunctions.hideLoadMoreButton();
 
@@ -75,8 +69,13 @@ btnLoadMore.addEventListener("click", async () => {
         page += 1;
         
         const data = await getImagesByQuery(query, page, per_page);
-        renderFunctions.renderPosts(data);
-    
+        if (data.hits.length === 0) {
+            renderFunctions.hideLoadMoreButton();
+            iziToast.info({ message: "We're sorry, but you've reached the end of search results." });
+            return;
+        }
+
+        renderFunctions.renderPosts(data.hits); 
         const galleryItem = document.querySelector(".gallery-item");
         if (galleryItem) {
             const cardHeight = galleryItem.getBoundingClientRect().height;
@@ -86,6 +85,7 @@ btnLoadMore.addEventListener("click", async () => {
             });
         }
         const maxPage = Math.ceil(data.totalHits / per_page);
+        
         if (page >= maxPage) {
             renderFunctions.hideLoadMoreButton();
             iziToast.info({ message: "We're sorry, but you've reached the end of search results." });
@@ -97,8 +97,10 @@ btnLoadMore.addEventListener("click", async () => {
             btnLoadMore.textContent = "Fetch more posts";
         }
     } catch (error) {
-        console.error(error);
-        renderFunctions.showLoadMoreButton();
+        iziToast.error({
+            message: 'An error occurred while loading more images. Please try again later.',
+        });
+        renderFunctions.showLoadMoreButton(); 
     } finally {
         renderFunctions.hideLoader();
     }
